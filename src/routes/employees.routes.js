@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { getAll, findOldest, create, findByName } = require('../controllers/employees.controller');
 const routes = Router();
-const validateEmployee = require('../middlewares/validEmployee');
+const validateEmployee = require('../middlewares/validEmployee.middleware');
 
 routes.get('/api/employees', getAll);
 routes.get('/api/employees/oldest', findOldest);
