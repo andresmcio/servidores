@@ -3,6 +3,7 @@ const Post = require('../database/models/post.model');
 module.exports = {
     getPosts: (req, res, next) => {
         Post.find({})
+            .populate('author')
             .then(posts => {
                 res.json(posts);
             })
@@ -12,7 +13,7 @@ module.exports = {
         Post.create({
             title: req.body.title,
             text: req.body.text,
-            author: req.body.author
+            author: req.user.id
         })
             .then(post => {
                 res.status(201).json(post);

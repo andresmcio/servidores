@@ -12,5 +12,6 @@ app.use(express.json());
 
 app.use(require('./routes/employees.routes'));
 app.use(require('./routes/posts.routes'));
+app.use(require('./routes/users.routes'));
 
 app.use(require('./middlewares/errorHandling.middleware'));

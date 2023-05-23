@@ -14,7 +14,8 @@ const schema = new mgoose.Schema({
             maxlength: 300
         },
         author: {
-            type: String,
+            type: mgoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: true,
         }
 
