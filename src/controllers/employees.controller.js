@@ -31,4 +31,26 @@ module.exports = {
         const oldestEmployees = employees.filter(employee => employee.age === Math.max(...employees.map(emp => emp.age)));
             return res.json(oldestEmployees[0]);
         },
+    create: (req, res) => {
+        const newEmployee = req.body;
+        let data = readFileSync(resolve(__dirname, '../database/data/employees.json'));
+        const employees = JSON.parse(data);
+
+        employees.push(newEmployee);
+
+        return res.status(201).json(newEmployee);
+    },
+    findByName: (req, res) => {
+        const name = req.params.name;
+        let data = readFileSync(resolve(__dirname, '../database/data/employees.json'));
+        const employees = JSON.parse(data);
+
+        const employee = employees.find(emp => emp.name.toLowerCase() === name.toLowerCase());
+
+        if (!employee) {
+            return res.status(404).json({ code: 'not_found' });
+        }
+
+        return res.json(employee);
+    }
 };
