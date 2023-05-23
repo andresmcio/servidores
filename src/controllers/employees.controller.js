@@ -7,11 +7,16 @@ module.exports = {
         const employees = JSON.parse(data);
         let page = parseInt(req.query.page);
         const isUser = req.query.user === 'true';
+        const badges = req.query.badges;
 
         let filteredEmployees = employees;
 
         if (isUser) {
             filteredEmployees = employees.filter(employee => employee.privileges === 'user');
+        }
+
+        if (badges) {
+            filteredEmployees = filteredEmployees.filter(employee => employee.badges.includes(badges));
         }
 
         if(page) {
