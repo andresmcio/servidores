@@ -22,7 +22,7 @@ module.exports = {
         if(page) {
             const limit = 2;
             let start = (page - 1) * limit;
-            let end = ((page - 1) * limit) + 1;
+            let end = ((page - 1) * limit) + limit;
             let result = employees.slice(start, end);
 
             return res.json(result);
