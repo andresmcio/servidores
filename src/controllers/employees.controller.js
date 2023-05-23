@@ -17,5 +17,11 @@ module.exports = {
         }
 
         return res.json(employees);
-    }
+    },
+    findOldest: (req, res) => {
+        let data = readFileSync(resolve(__dirname, '../database/data/employees.json'));
+        const employees = JSON.parse(data);
+        const oldestEmployees = employees.filter(employee => employee.age === Math.max(...employees.map(emp => emp.age)));
+            return res.json(oldestEmployees[0]);
+        },
 };
