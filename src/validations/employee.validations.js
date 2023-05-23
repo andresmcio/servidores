@@ -17,14 +17,14 @@ function isValidEmployee(employee) {
       return false;
     }
   
-    const phoneFormat = /^\d{3}-\d{3}-\d{3}$/;
-    if (
-      !phoneFormat.test(employee.phone.personal) ||
-      !phoneFormat.test(employee.phone.work) ||
-      !phoneFormat.test(employee.phone.ext)
-    ) {
-      return false;
-    }
+    // const phoneFormat = /^\d{3}-\d{3}-\d{3}$/;
+    // if (
+    //   !phoneFormat.test(employee.phone.personal) ||
+    //   !phoneFormat.test(employee.phone.work) ||
+    //   !phoneFormat.test(employee.phone.ext)
+    // ) {
+    //   return false;
+    // }
   
     // Validar que "age" sea un número
     if (typeof employee.age !== 'number') {
@@ -51,4 +51,4 @@ function isValidEmployee(employee) {
     return true;
   }
 
-    module.exports = isValidEmployee;
+    module.exports = isValidEmployee
