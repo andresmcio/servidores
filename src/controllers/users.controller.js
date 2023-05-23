@@ -17,7 +17,7 @@ module.exports = {
         .catch(next);
     },
     login: (req, res, next) => {
-        User.findOne({ email: req.body.email })
+        User.findOne({ email: req.body.email, active: true })
         .then((user) => {
             if(user){
                 user.checkPassword(req.body.password)
@@ -36,5 +36,24 @@ module.exports = {
             }
         })
         .catch(next);
-    }     
+    },     
+    activate: (req, res, next) => {
+        User.findByIdAndUpdate(req.params.id).then((user) => {
+            if(user){
+                if(user.active === false){
+                    user.active = true;
+                    user.save().then((user) => {
+                        res.status(200).json(user);
+                    });
+
+                } else {
+                    res.status(400).json({ message: 'User already activated' });
+                }
+            } else {
+                res.status(404).json({ message: 'User not found' });
+            }
+        }
+        )
+        .catch(next);
+    },
 };
