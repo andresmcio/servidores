@@ -6,6 +6,13 @@ module.exports = {
         let data = readFileSync(resolve(__dirname, '../database/data/employees.json'));
         const employees = JSON.parse(data);
         let page = parseInt(req.query.page);
+        const isUser = req.query.user === 'true';
+
+        let filteredEmployees = employees;
+
+        if (isUser) {
+            filteredEmployees = employees.filter(employee => employee.privileges === 'user');
+        }
 
         if(page) {
             const limit = 2;
@@ -16,7 +23,7 @@ module.exports = {
             return res.json(result);
         }
 
-        return res.json(employees);
+        return res.json(filteredEmployees);
     },
     findOldest: (req, res) => {
         let data = readFileSync(resolve(__dirname, '../database/data/employees.json'));
